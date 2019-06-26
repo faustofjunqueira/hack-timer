@@ -1,3 +1,5 @@
 {
-  "teste": "oi mundo cao"
+  "application.shutdown": "Application shutdown",
+  "application.middleware.done": "Middleware configured",
+  "application.route.done": "Routes configured"
 }

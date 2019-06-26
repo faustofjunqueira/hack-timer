@@ -3,7 +3,7 @@ const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
-require('./utils/log');
+const logger = require('./utils/log');
 //const mongoose = require('mongoose');
 
 
@@ -17,26 +17,25 @@ module.exports.startApplication = async function () {
     routes(application);
     upServer(application, config.get('http.port'));
     return application;
-  } catch (e) {
-    console.log(e);
-    console.log("Application shutdown");
+  } catch (error) {
+    logger.error('application.shutdown', { error })
     process.exit(-1);
   }
 }
 
-function middlewares(application, ) {
+function middlewares(application) {
   application.set("maxFieldsSize", '200 * 1024 * 1024 * 1024');
   application.use(morgan('<:remote-addr - :remote-user ":referrer" ":user-agent"> ":method :url HTTP/:http-version" :status'));
   application.use(bodyParser.json({ limit: '5mb' }));
   application.use(bodyParser.urlencoded({ limit: '5mb', extended: true }));
   application.use(bodyParser.raw({ limit: '5mb' }));
   application.use(helmet());
-  console.log("Middleware configured");
+  logger.info('application.middleware.done');
 }
 
 function routes(application) {
   application.use("/company", require('./services/company.service'));
-  console.log("Routes configured");
+  logger.info("application.route.done");
 }
 
 async function database() {
