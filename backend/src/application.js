@@ -1,13 +1,36 @@
+const mongoose = require('mongoose');
 const config = require('config');
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const logger = require('./utils/log');
-//const mongoose = require('mongoose');
-
-
 const { upServer } = require('./server');
+
+// social media wall
+// - de n - n uma requisição para o Instagram, Twitter e Fb buscando pela hashtag
+// - Armazena no banco o resultado
+// - oferece por websocket
+
+// Timer
+// - Configurar Timer com horario do server quando começou e quanto tempo desejar
+// - Quando criar um Timer, criar uma instancia de timer
+// - Start / Pause Timer
+// - Websocket do timer
+
+// @todo
+// - Agenda
+// -
+// - Palestra
+// -
+// - Premiação
+// -
+// - Ester egg
+// -
+// - Aviso momentâneo(com ou sem cronometro)
+// -
+// - Login com AD
+
 
 module.exports.startApplication = async function () {
   try {
@@ -34,11 +57,11 @@ function middlewares(application) {
 }
 
 function routes(application) {
-  application.use("/company", require('./services/company.service'));
+  //application.use("/timer", require('./components/timer').router);
   logger.info("application.route.done");
 }
 
 async function database() {
-  // await mongoose.connect(config.get("db.host"), config.get("db.options"));
-  // console.log("Database Connected");
+  await mongoose.connect(config.get("db.mongo.host"), config.get("db.mongo.options"));
+  logger.info("application.db.done");
 }

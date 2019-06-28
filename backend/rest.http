@@ -1,0 +1,31 @@
+@url=http://localhost:10000
+
+### @name TimerPut
+PUT {{url}}/timer
+Content-Type: application/json
+
+{
+  "name": "HackRadix",
+  "amount": 129600000
+}
+
+### @name TimerGet
+GET {{url}}/timer
+Content-Type: application/json
+
+### @name TimerGetById
+GET {{url}}/timer/5d13a14488080b40c0e9333a
+Content-Type: application/json
+
+### @name TimerDeleteById
+DELETE {{url}}/timer/5d13a14488080b40c0e9333a
+Content-Type: application/json
+
+
+#
+# c = require('countdown')
+clearInterval(z)
+c.resetLabels();
+c.setLabels( '||||||||||','||||||||||', ':', ':', ':', 'Now.');
+z = c(t => console.log(t.toString()), new Date('2019-06-26T19:57:00.000Z'), c.HOURS|c.MINUTES|c.SECONDS)
+

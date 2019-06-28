@@ -1,5 +1,6 @@
 {
   "application.shutdown": "Application shutdown",
   "application.middleware.done": "Middleware configured",
-  "application.route.done": "Routes configured"
+  "application.route.done": "Routes configured",
+  "application.db.done": "Database Connected"
 }

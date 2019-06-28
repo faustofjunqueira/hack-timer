@@ -2,6 +2,15 @@
   "http": {
     "port": 10000
   },
+  "db": {
+    "mongo": {
+      "host": "mongodb://localhost/timer",
+      "options": {
+        "useCreateIndex": true,
+        "useNewUrlParser": true
+      }
+    }
+  },
   "log": {
     "default": {
       "format": {
