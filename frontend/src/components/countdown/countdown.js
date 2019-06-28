@@ -1,61 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { startCountdown } from './countdown.service';
 
-export class Clock extends React.Component {
+const Clock = ({ time }) => {
+  let hours = Math.floor(time / (1000 * 60 * 60));
+  let minutes = Math.floor((time % (1000 * 60 * 60)) / (1000 * 60));
+  let seconds = Math.floor((time % (1000 * 60)) / 1000);
 
-  get hours() {
-    const hours = Math.floor(this.props.time / (1000 * 60 * 60));
-    return hours < 10 ? `0${hours}` : hours;
-  }
-
-  get minutes() {
-    const minutes = Math.floor((this.props.time % (1000 * 60 * 60)) / (1000 * 60));
-    return minutes < 10 ? `0${minutes}` : minutes;
-  }
-
-  get seconds() {
-    const seconds = Math.floor((this.props.time % (1000 * 60)) / 1000);
-    return seconds < 10 ? `0${seconds}` : seconds;
-  }
-
-  render() {
-    return (
-      <div className="clock">
-        <span className="clock_hours">{this.hours}:</span>
-        <span className="clock_minutes">{this.minutes}:</span>
-        <span className="clock_seconds">{this.seconds}</span>
-      </div>
-    );
-  }
+  return (
+    <div className="clock">
+      <span className="clock_hours">{hours < 10 ? `0${hours}` : hours}</span>:
+        <span className="clock_minutes">{minutes < 10 ? `0${minutes}` : minutes}</span>:
+        <span className="clock_seconds">{seconds < 10 ? `0${seconds}` : seconds}</span>
+    </div>
+  );
 }
 
-export class CountdownTimer extends React.Component {
+export const CountdownTimer = ({ deadline, maxTime, onEnd }) => {
+  const [timeLeft, setTimeLeft] = useState(Math.min(deadline, maxTime));
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      timeLeft: this.getTimeLeft(props.deadline)
-    };
-  }
+  // start o countdown
+  startCountdown(deadline, timeLeft =>
+    setTimeLeft(Math.min(timeLeft, maxTime)),
+    onEnd,
+    700
+  );
 
-  componentWillMount() {
-    startCountdown(this.props.deadline, timeLeft =>
-      this.setState({
-        timeLeft: this.getTimeLeft(timeLeft, this.props.maxTime)
-      }),
-      this.props.onEnd,
-      700
-    );
-  }
-
-  getTimeLeft(timeLeft) {
-    return Math.min(timeLeft, this.props.maxTime);
-  }
-
-  render() {
-    return (
-      <Clock time={this.state.timeLeft} />
-    )
-  }
+  return (
+    <Clock time={timeLeft} />
+  );
 
 }
