@@ -33,30 +33,23 @@ export class CountdownTimer extends React.Component {
 
   constructor(props) {
     super(props);
-    const deadline = props.deadline instanceof Date ? props.deadline.getTime() : (new Date(props.deadline)).getTime();
-    const maxTime = Number(props.maxTime);
-
     this.state = {
-      timeLeft: this.getTimeLeft(deadline, maxTime),
-      maxTime,
-      deadline
+      timeLeft: this.getTimeLeft(props.deadline)
     };
   }
 
   componentWillMount() {
-    startCountdown(this.state.deadline, timeLeft =>
+    startCountdown(this.props.deadline, timeLeft =>
       this.setState({
-        timeLeft: this.getTimeLeft(timeLeft, this.state.maxTime),
-        maxTime: this.state.maxTime,
-        deadline: this.state.deadline
+        timeLeft: this.getTimeLeft(timeLeft, this.props.maxTime)
       }),
-      () => console.log('end'),
+      this.props.onEnd,
       700
     );
   }
 
-  getTimeLeft(timeLeft, maxTime) {
-    return Math.min(timeLeft, maxTime);
+  getTimeLeft(timeLeft) {
+    return Math.min(timeLeft, this.props.maxTime);
   }
 
   render() {
