@@ -18,10 +18,7 @@
       }
     }
   },
-  "social": {
-    "instagram": {
-      "clientId": "34b24aa0326d47528d59253540f671d5",
-      "clientSecret": "dbf6500c9f444faaa41fc05683912aef"
-    }
+  "instagram": {
+    "time-fetch-data": 30000
   }
 }

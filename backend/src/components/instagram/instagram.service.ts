@@ -1,30 +1,38 @@
-import { IConfiguration } from './../configuration/configuration';
 import { Router, Request, Response, Application } from 'express';
 import * as api from './instagram.api';
 import { getHost } from '../../utils/request';
 import { updateConfig } from '../configuration/configuration.service';
 
-export async function instagramAuthRedirect(req: Request, res: Response) {
+export async function instagramGrantAccess(req: Request, res: Response) {
   const { clientId, clientSecret } = req.query;
   const configuration = await updateConfig('instagram.auth', { clientId, clientSecret });
 
   res.redirect(
     api.instagramAuthRedirect(
       configuration.instagram.auth.clientId,
-      `${getHost(req)}/instagram/code`
+      `${getHost(req)}/instagram/auth`
     )
   );
 }
 
-export async function instagramSaveCode(req: Request, res: Response) {
+export async function instagramAuth(req: Request, res: Response) {
   const instagramCode = req.query.code;
   const config = await updateConfig('instagram.auth.code', instagramCode);
-  res.json(config);
+
+  const c = await api.instagramGetAccessToken(
+    config.instagram.auth.clientId,
+    config.instagram.auth.clientSecret,
+    instagramCode,
+    `${getHost(req)}/instagram/auth`
+  );
+
+  res.json(await updateConfig('instagram.auth.accessToken', instagramCode));
 }
 
 export function configurationInstragramRouter(application: Application): void {
   const router = Router();
-  router.get('/auth', instagramAuthRedirect);
-  router.get('/code', instagramSaveCode);
+  router.get('/grant', instagramGrantAccess);
+  router.get('/auth', instagramAuth);
+
   application.use('/instagram', router);
 } 
