@@ -6,7 +6,8 @@ import bodyParser = require('body-parser');
 import helmet = require('helmet');
 import logger from './utils/log';
 import { upServer } from './server';
-import { configurationInstragramRouter } from './components/instagram/instagram.service';
+import { configurationInstragramRouter as configureInstragramRouter } from './components/instagram/instagram.service';
+import { configureConfigurationRoute } from './components/configuration/configuration.service';
 
 export async function startApplication() {
   try {
@@ -33,7 +34,8 @@ function middlewares(application) {
 }
 
 function routes(application) {
-  configurationInstragramRouter(application);
+  configureInstragramRouter(application);
+  configureConfigurationRoute(application);
   logger.info("application.route.done");
 }
 
