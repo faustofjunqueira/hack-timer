@@ -8,7 +8,7 @@ TODO:
  - Auth Twitter
  - Social Media Wall
  - Filtros
- - Agenda
+ - Agenda `POST /agenda/csv` `GET /agenda/csv`
  - Timer no backend
  - Avisos
  - ester-eggs
