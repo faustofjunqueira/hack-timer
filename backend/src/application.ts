@@ -40,6 +40,12 @@ function routes(application) {
 }
 
 async function database() {
-  await mongoose.connect(config.get("db.mongo.host"), config.get("db.mongo.options"));
+  let users = ''
+  if (config.has("db.mongo.user") && config.has("db.mongo.pass")) {
+    users = `${encodeURIComponent(config.get("db.mongo.user"))}:${encodeURIComponent(config.get("db.mongo.pass"))}@`;
+  }
+  const url = `mongodb://${users}${config.get("db.mongo.host")}`;
+  logger.info("application.db.url", { url });
+  await mongoose.connect(url, config.get("db.mongo.options"));
   logger.info("application.db.done");
 }

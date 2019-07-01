@@ -1,15 +1,25 @@
+import { IConfiguration } from './../configuration/configuration';
 import { Router, Request, Response, Application } from 'express';
 import * as api from './instagram.api';
-import config = require('config');
 import { getHost } from '../../utils/request';
+import { updateConfig } from '../configuration/configuration.service';
 
-export function instagramAuthRedirect(req: Request, res: Response) {
-  res.redirect(api.instagramAuthRedirect(config.get('social.instagram.clientId'), `${getHost(req)}/instagram/code`));
+export async function instagramAuthRedirect(req: Request, res: Response) {
+  const { clientId, clientSecret } = req.query;
+  const configuration = await updateConfig('instagram.auth', { clientId, clientSecret });
+
+  res.redirect(
+    api.instagramAuthRedirect(
+      configuration.instagram.auth.clientId,
+      `${getHost(req)}/instagram/code`
+    )
+  );
 }
 
-export function instagramSaveCode(req: Request, res: Response) {
+export async function instagramSaveCode(req: Request, res: Response) {
   const instagramCode = req.query.code;
-  res.json(instagramCode);
+  const config = await updateConfig('instagram.auth.code', instagramCode);
+  res.json(config);
 }
 
 export function configurationInstragramRouter(application: Application): void {
