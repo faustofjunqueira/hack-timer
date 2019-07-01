@@ -1,8 +1,8 @@
-const config = require('config');
-const winston = require('winston');
-const messagesKey = require('../assets/message.json');
+import config = require('config');
+import winston = require('winston');
 const { format } = winston;
 const { combine, printf } = format;
+const messagesKey = require('../assets/message.json');
 
 const console = new winston.transports.Console();
 
@@ -32,4 +32,4 @@ winston.configure({
 });
 
 
-module.exports = winston;
+export default winston;

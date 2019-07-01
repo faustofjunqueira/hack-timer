@@ -4,7 +4,7 @@
   },
   "db": {
     "mongo": {
-      "host": "mongodb://localhost/timer",
+      "host": "mongodb://localhost/hackathon",
       "options": {
         "useCreateIndex": true,
         "useNewUrlParser": true
@@ -16,6 +16,12 @@
       "format": {
         "label": "default"
       }
+    }
+  },
+  "social": {
+    "instagram": {
+      "clientId": "34b24aa0326d47528d59253540f671d5",
+      "clientSecret": "dbf6500c9f444faaa41fc05683912aef"
     }
   }
 }

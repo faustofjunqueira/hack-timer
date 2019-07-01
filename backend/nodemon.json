@@ -1,14 +1,14 @@
 {
   "watch": [
-    "src"
+    "src",
+    "config"
   ],
-  "ext": "js",
+  "ext": "ts",
   "ignore": [
     "src/**/*.spec.ts"
   ],
   "env": {
-    "NODE_ENV": "development",
-    "GOOGLE_API_KEY": "AIzaSyCmlsJvJc1wtrhcTCp0mYBcx4YQUKXRO30"
+    "NODE_ENV": "development"
   },
-  "exec": "node ./src/index.js"
+  "exec": "ts-node ./src/index.ts"
 }
