@@ -10,10 +10,9 @@ export async function instagramAuthRedirect(req: Request, res: Response) {
 
   res.redirect(
     api.instagramAuthRedirect(
-      configuration.instagram.auth.clientId,
-      `${getHost(req)}/instagram/code`
-    )
-  );
+          configuration.instagram.auth.clientId,
+          `${getHost(req)}/instagram/code`
+        ));
 }
 
 export async function instagramSaveCode(req: Request, res: Response) {
@@ -27,4 +26,4 @@ export function configurationInstragramRouter(application: Application): void {
   router.get('/auth', instagramAuthRedirect);
   router.get('/code', instagramSaveCode);
   application.use('/instagram', router);
-} 
+}

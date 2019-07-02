@@ -7,7 +7,7 @@ export interface IConfiguration extends Document {
       clientId: string,
       clientSecret: string
     }
-  }
+  };
 }
 
 const ConfigurationSchema: Schema = new Schema({
