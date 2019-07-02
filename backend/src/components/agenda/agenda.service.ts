@@ -20,6 +20,11 @@ export function csvParse(csvPath: string): IHackActivity[]
     return activities;
 }
 
+export async function getActivities()
+{
+   return await HackActivity.find({});
+}
+
 export async function saveActivities(csvPath: string)
 {
     try
