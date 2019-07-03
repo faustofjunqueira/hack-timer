@@ -4,8 +4,8 @@ import * as parse from "csv-parse/lib/sync";
 
 export function csvParse(csvPath: string): IHackActivity[]
 {
-    const csv: Array<{start: string, end: string, title: string, description: string}> =
-    parse(fs.readFileSync(csvPath).toString().trim(),
+    const csv: Array<{start: string, end: string, title: string, description: string}> = parse(
+        fs.readFileSync(csvPath).toString().trim(),
         {columns: (header) => header}
     );
     const activities = new Array<IHackActivity>();

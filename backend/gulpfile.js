@@ -14,7 +14,7 @@ gulp.task('clean', function limparJS() {
 });
 
 // Compila o TS para JS
-gulp.task('build', ['clean'], () => {
+gulp.task('build', gulp.series('clean', () => {
   const tsProject = ts.createProject('tsconfig.json');
   return es.merge([
     tsProject.src().pipe(tsProject()).js,
@@ -26,5 +26,5 @@ gulp.task('build', ['clean'], () => {
     })
     .pipe(sizereport())
     .pipe(gulp.dest('./js/'));
-});
+}));
 
