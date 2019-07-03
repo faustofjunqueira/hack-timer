@@ -16,6 +16,7 @@
     "config": "^3.1.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "fb": "^2.0.0",
     "helmet": "^3.18.0",
     "lodash": "^4.17.11",
     "mongoose": "^5.6.2",
@@ -23,6 +24,7 @@
     "multer": "^1.4.1",
     "request": "^2.88.0",
     "request-promise": "^4.2.4",
+    "twitter": "^1.7.1",
     "winston": "^3.2.1"
   },
   "devDependencies": {
@@ -34,6 +36,7 @@
     "@types/mongoose": "^5.5.6",
     "@types/morgan": "^1.7.35",
     "@types/request": "^2.48.1",
+    "@types/twitter": "^1.7.0",
     "eslint": "^6.0.1",
     "eslint-plugin-import": "^2.18.0",
     "event-stream": "^4.0.1",

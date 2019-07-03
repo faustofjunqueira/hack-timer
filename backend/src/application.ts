@@ -6,8 +6,9 @@ import bodyParser = require('body-parser');
 import helmet = require('helmet');
 import logger from './utils/log';
 import { upServer } from './server';
-import { configurationInstragramRouter as configureInstragramRouter } from './components/instagram/instagram.service';
 import { configureConfigurationRoute } from './components/configuration/configuration.service';
+import { configureTwitterRouter } from './components/twitter/twitter.service';
+import { twitterFetchData } from './components/twitter/twitter.process';
 
 export async function startApplication() {
   try {
@@ -16,6 +17,7 @@ export async function startApplication() {
     middlewares(application);
     routes(application);
     upServer(application, config.get('http.port'));
+    startProcess();
     return application;
   } catch (error) {
     logger.error('application.shutdown', { error })
@@ -34,7 +36,7 @@ function middlewares(application) {
 }
 
 function routes(application) {
-  configureInstragramRouter(application);
+  configureTwitterRouter(application);
   configureConfigurationRoute(application);
   logger.info("application.route.done");
 }
@@ -48,4 +50,8 @@ async function database() {
   logger.info("application.db.url", { url });
   await mongoose.connect(url, config.get("db.mongo.options"));
   logger.info("application.db.done");
+}
+
+function startProcess() {
+  twitterFetchData();
 }

@@ -1,5 +1,5 @@
 import { getConfig } from "../configuration/configuration.service";
-import { createCicleFunction } from "../../utils/funcao-ciclica";
+import { createCicleFunction } from "../../utils/cicle-function";
 import { IConfiguration } from "../configuration/configuration";
 import config = require('config');
 

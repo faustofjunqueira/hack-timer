@@ -20,5 +20,8 @@
   },
   "instagram": {
     "time-fetch-data": 30000
+  },
+  "twitter": {
+    "time-fetch-data": 60000
   }
 }

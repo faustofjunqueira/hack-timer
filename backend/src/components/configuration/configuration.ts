@@ -8,6 +8,15 @@ export interface IConfiguration extends Document {
       clientId: string,
       clientSecret: string
     }
+  },
+  twitter: {
+    auth: {
+      consumerKey: string,
+      consumerSecret: string,
+      accessToken: string
+    },
+    query: string,
+    sinceId: number
   }
 }
 
@@ -19,6 +28,15 @@ const ConfigurationSchema: Schema = new Schema({
       clientId: { type: String, unique: true },
       clientSecret: { type: String }
     }
+  },
+  twitter: {
+    auth: {
+      consumerKey: { type: String, unique: true },
+      consumerSecret: String,
+      accessToken: String
+    },
+    query: String,
+    sinceId: { type: Number, default: }
   }
 });
 
