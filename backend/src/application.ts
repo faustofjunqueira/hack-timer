@@ -8,6 +8,7 @@ import logger from './utils/log';
 import { upServer } from './server';
 import { configureConfigurationRoute } from './components/configuration/configuration.service';
 import { configureAgendaRouter } from './components/agenda/agenda.api';
+import { saveActivities, resetActivities } from './components/agenda/agenda.service';
 import { configureTwitterRouter } from './components/twitter/twitter.service';
 import { twitterFetchData } from './components/twitter/twitter.process';
 import { configureMediaRouter } from './components/media/media.service';
@@ -55,6 +56,9 @@ async function database() {
   logger.info("application.db.url", { url });
   await mongoose.connect(url, config.get("db.mongo.options"));
   logger.info("application.db.done");
+  await resetActivities();
+  await saveActivities('assets/agend.example.csv');
+  logger.info("application.db.agenda");
 }
 
 function startProcess() {

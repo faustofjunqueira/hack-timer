@@ -20,12 +20,12 @@ export function csvParse(csvPath: string): IHackActivity[]
     return activities;
 }
 
-export async function getActivities()
+export async function getActivities(): Promise<IHackActivity[]>
 {
    return await HackActivity.find({});
 }
 
-export async function saveActivities(csvPath: string)
+export async function saveActivities(csvPath: string): Promise<IHackActivity[]>
 {
     try
     {
@@ -36,7 +36,7 @@ export async function saveActivities(csvPath: string)
         });
         return Promise.resolve(docs);
     } catch {
-        return Promise.reject();
+        return Promise.resolve([]);
     }
 }
 
