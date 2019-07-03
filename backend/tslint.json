@@ -12,7 +12,8 @@
         "trailing-comma": false,
         "one-line": false,
         "object-literal-sort-keys": false,
-        "whitespace": false
+        "whitespace": false,
+        "no-string-literal": false
     },
     "rulesDirectory": []
 }
