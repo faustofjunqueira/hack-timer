@@ -7,12 +7,13 @@ const messagesKey = require('../assets/message.json');
 const console = new winston.transports.Console();
 
 const messageKeyFormat = printf(({ level, message, label, timestamp, ...meta }) => {
-  const handledLabel = label === config.get('log.default.format.label') ? '' : " [" + label + "]"
-  let handledError = '', handledMeta = '';
+  const handledLabel = label === config.get('log.default.format.label') ? '' : " [" + label + "]";
+  let handledError = '';
+  let handledMeta = '';
   if (Object.keys(meta).length) {
-    let { error, ...otherMetas } = meta;
+    const { error, ...otherMetas } = meta;
     if (Object.keys(otherMetas).length) {
-      handledMeta = ' ' + JSON.stringify(otherMetas)
+      handledMeta = ' ' + JSON.stringify(otherMetas);
     }
     if (error && error instanceof Error) {
       handledError = `\n${error.stack}`;
@@ -30,6 +31,5 @@ winston.configure({
   ),
   transports: [console]
 });
-
 
 export default winston;

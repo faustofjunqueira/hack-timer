@@ -4,7 +4,7 @@
   },
   "db": {
     "mongo": {
-      "host": "localhost:27017/hackathon",
+      "host": "192.168.99.100:27017/hackathon",
       "options": {
         "useCreateIndex": true,
         "useNewUrlParser": true

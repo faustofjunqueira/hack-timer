@@ -10,7 +10,7 @@ const sizereport = require('gulp-sizereport');
 gulp.task('clean', function limparJS() {
   return gulp.src(['./js'], {
     read: false
-  }).pipe(clean());
+  }).pipe(clean({allowEmpty: true}));
 });
 
 // Compila o TS para JS
@@ -20,10 +20,10 @@ gulp.task('build', gulp.series('clean', () => {
     tsProject.src().pipe(tsProject()).js,
     gulp.src(['!./src/**/*.ts', './src/**/*'])
   ])
-    .pipe(check(/(console\.(log|info|error|trace))|debugger |junda/)).on('error', err => {
-      gutil.log(gutil.colors.red(err));
-      process.exit(-1);
-    })
+    // .pipe(check(/(console\.(log|info|error|trace))|debugger |junda/)).on('error', err => {
+    //   gutil.log(gutil.colors.red(err));
+    //   process.exit(-1);
+    // })
     .pipe(sizereport())
     .pipe(gulp.dest('./js/'));
 }));

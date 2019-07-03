@@ -57,7 +57,7 @@ async function database() {
   await mongoose.connect(url, config.get("db.mongo.options"));
   logger.info("application.db.done");
   await resetActivities();
-  await saveActivities('assets/agend.example.csv');
+  await saveActivities('./src/assets/agenda.example.csv');
   logger.info("application.db.agenda");
 }
 

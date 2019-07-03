@@ -1,4 +1,5 @@
 import { HackActivity, IHackActivity } from "./agenda";
+import logger from '../../utils/log';
 import * as fs from "fs";
 import * as parse from "csv-parse/lib/sync";
 
@@ -17,6 +18,7 @@ export function csvParse(csvPath: string): IHackActivity[]
             description: row.description
         }));
     });
+    logger.info(activities);
     return activities;
 }
 
@@ -32,11 +34,11 @@ export async function saveActivities(csvPath: string): Promise<IHackActivity[]>
         const activities = csvParse(csvPath);
         const docs: IHackActivity[] = [];
         await activities.forEach(async (a) => {
-            docs.push(await a.save());
+            docs.push(await HackActivity.create(a));
         });
         return Promise.resolve(docs);
     } catch {
-        return Promise.resolve([]);
+        return Promise.reject();
     }
 }
 

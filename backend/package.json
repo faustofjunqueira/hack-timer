@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "prestart": "gulp build",
     "start": "nodemon",
     "build": "gulp build",
     "test": "echo \"Error: no test specified\" && exit 1"
