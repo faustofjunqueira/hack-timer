@@ -1,4 +1,3 @@
-import { Media } from './../media/media';
 import { getConfig, updateConfig } from "../configuration/configuration.service";
 import Twitter = require('twitter');
 import config = require('config');
@@ -8,13 +7,12 @@ import logger from '../../utils/log';
 import { storeMedia } from '../media/media.service';
 import { createCicleFunction } from '../../utils/cicle-function';
 
-
 const getTweetMedia = (tweet: any): string =>
   get(tweet, 'entities.media[0].media_url') ||
   get(tweet, 'retweeted_status.entities.media[0].media_url')
 
 
-function parseTweet(tweet: any): Media {
+function parseTweet(tweet: any): any {
   return {
     date: new Date(tweet.created_at),
     profile: {
@@ -39,14 +37,15 @@ async function twitterFetchDataIteration(twitter: Twitter) {
     const tweet = await twitterGetDataByQuery(twitter, tweetQuery, sinceId);
     if (tweet && tweet.statuses && tweet.statuses.length) {
       sinceId = get(tweet, 'statuses[0].id') as number;
-      const tweetParsed: Media[] = tweet.statuses.map(parseTweet);
+      const tweetParsed = tweet.statuses.map(parseTweet);
       await storeMedia(tweetParsed);
       await updateConfig('twitter.sinceId', sinceId);
       logger.info('process.twitter.stored', { count: tweet.statuses.length });
     }
     logger.info('process.twitter.it.end', { tweetQuery, sinceId });
   } catch (err) {
-    logger.info('process.twitter.it.error', { err });
+    console.log(err);
+    logger.info('process.twitter.it.error');
   }
 }
 

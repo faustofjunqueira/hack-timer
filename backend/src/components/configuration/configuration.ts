@@ -36,7 +36,7 @@ const ConfigurationSchema: Schema = new Schema({
       accessToken: String
     },
     query: String,
-    sinceId: { type: Number, default: }
+    sinceId: { type: Number, default: 0 }
   }
 });
 

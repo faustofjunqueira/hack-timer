@@ -48,3 +48,7 @@ Content-Type: application/json
 {
   "query":"#hackathonradix"
 }
+
+### @name getMedia
+GET {{url}}/media
+Content-Type: application/json

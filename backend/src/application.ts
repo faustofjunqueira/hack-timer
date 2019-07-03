@@ -9,6 +9,7 @@ import { upServer } from './server';
 import { configureConfigurationRoute } from './components/configuration/configuration.service';
 import { configureTwitterRouter } from './components/twitter/twitter.service';
 import { twitterFetchData } from './components/twitter/twitter.process';
+import { configureMediaRouter } from './components/media/media.service';
 
 export async function startApplication() {
   try {
@@ -38,6 +39,7 @@ function middlewares(application) {
 function routes(application) {
   configureTwitterRouter(application);
   configureConfigurationRoute(application);
+  configureMediaRouter(application);
   logger.info("application.route.done");
 }
 
