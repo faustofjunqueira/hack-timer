@@ -61,6 +61,4 @@ async function database() {
   logger.info("application.db.url", { url });
   await mongoose.connect(url, config.get("db.mongo.options"));
   logger.info("application.db.done");
-  await resetActivities();
-  logger.info("application.db.agenda");
 }
