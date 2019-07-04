@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu+Condensed&display=swap');
+
+.clock{
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#e52dc3+0,ffbb00+100 */
+    background: #e52dc3; /* Old browsers */
+    background: -moz-linear-gradient(left,  #e52dc3 0%, #ffbb00 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left,  #e52dc3 0%,#ffbb00 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right,  #e52dc3 0%,#ffbb00 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e52dc3', endColorstr='#ffbb00',GradientType=1 ); /* IE6-9 */
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    width: 100%;
+    height: 15vh;
+    z-index: 1;
+}
+.device .numbers{
+    font-family: 'Ubuntu Condensed', sans-serif;
+    align-self: center;
+    font-size: 5rem;
+    color: #fff;
+    line-height: 4rem;
+}
+.device label{
+    font-size: 2rem;
+    color: #fff;
+}
+.device{
+    flex: 1;
+    text-align: right;
+    padding: .5rem;
+}
+.logo{
+    flex: 1 1;
+    background: url(/static/media/logo.dc00bb74.png);
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: 1rem;
+
+}
+.agenda{
+    display: flex;
+    flex: 1;
+    justify-content: space-around;
+}
+.agenda .now{
+    margin: 1rem;
+    align-self: center;
+}
+.agenda .now label{
+    font-size: 1rem;
+    color: #fff;
+}
+.agenda .now div{
+    font-size: 3rem;
+    color: #fff;
+}
+.agenda .next{
+    margin: 1rem;
+    align-self: center;
+}
+.agenda .next label{
+    font-size: 1rem;
+    color: #fff;
+}
+.agenda .next div{
+    font-size: 2rem;
+    color: #fff;
+}
