@@ -2,8 +2,8 @@
 Timer for Hackathons
 
 TODO:
- - Design (mattos)
- - Config screen
+ - Design (britto)
+ - Config screen 
  - Auth Instagram
  - Auth Twitter
  - Social Media Wall

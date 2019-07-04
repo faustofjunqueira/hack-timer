@@ -4,14 +4,12 @@ import express = require('express');
 import morgan = require('morgan');
 import bodyParser = require('body-parser');
 import helmet = require('helmet');
+import cors = require('cors');
 import logger from './utils/log';
 import { upServer } from './server';
 import { configureConfigurationRoute } from './components/configuration/configuration.service';
 import { configureAgendaRouter } from './components/agenda/agenda.api';
 import { saveActivities, resetActivities } from './components/agenda/agenda.service';
-import { configureTwitterRouter } from './components/twitter/twitter.service';
-import { twitterFetchData } from './components/twitter/twitter.process';
-import { configureMediaRouter } from './components/media/media.service';
 
 export async function startApplication() {
   try {
@@ -20,7 +18,6 @@ export async function startApplication() {
     middlewares(application);
     routes(application);
     upServer(application, config.get('http.port'));
-    startProcess();
     return application;
   } catch (error) {
     logger.error('application.shutdown', { error });
@@ -30,6 +27,7 @@ export async function startApplication() {
 
 function middlewares(application) {
   application.set("maxFieldsSize", '200 * 1024 * 1024 * 1024');
+  application.use(cors());
   application.use(
     morgan('<:remote-addr - :remote-user ":referrer" ":user-agent"> ":method :url HTTP/:http-version" :status'));
   application.use(bodyParser.json({ limit: '5mb' }));
@@ -40,10 +38,8 @@ function middlewares(application) {
 }
 
 function routes(application) {
-  configureTwitterRouter(application);
   configureConfigurationRoute(application);
   configureAgendaRouter(application);
-  configureMediaRouter(application);
 
   application.get('/echo', (req, res) => {
 
@@ -67,8 +63,4 @@ async function database() {
   await resetActivities();
   await saveActivities('./src/assets/agenda.example.csv');
   logger.info("application.db.agenda");
-}
-
-function startProcess() {
-  twitterFetchData();
 }

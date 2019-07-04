@@ -52,3 +52,6 @@ Content-Type: application/json
 ### @name getMedia
 GET {{url}}/media
 Content-Type: application/json
+
+### @name getAgenda
+GET {{url}}/agenda

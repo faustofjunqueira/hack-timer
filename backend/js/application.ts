@@ -44,6 +44,14 @@ function routes(application) {
   configureConfigurationRoute(application);
   configureAgendaRouter(application);
   configureMediaRouter(application);
+
+  application.get('/echo', (req, res) => {
+
+    res.json({
+      body: req.body,
+      query: req.query
+    }).status(200)
+  })
   logger.info("application.route.done");
 }
 
