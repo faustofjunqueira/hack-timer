@@ -4,7 +4,7 @@
   },
   "db": {
     "mongo": {
-      "host": "192.168.99.100:27017/hackathon",
+      "host": "localhost:27017/hackathon",
       "options": {
         "useCreateIndex": true,
         "useNewUrlParser": true
@@ -23,5 +23,8 @@
   },
   "twitter": {
     "time-fetch-data": 60000
+  },
+  "agenda": {
+    "csvPath": "C:\\Projetos\\hack-timer\\backend\\src\\assets\\agenda.example.csv"
   }
 }

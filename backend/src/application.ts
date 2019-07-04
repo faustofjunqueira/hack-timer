@@ -35,6 +35,7 @@ function middlewares(application) {
   application.use(bodyParser.json({ limit: '5mb' }));
   application.use(bodyParser.urlencoded({ limit: '5mb', extended: true }));
   application.use(bodyParser.raw({ limit: '5mb' }));
+  application.use(bodyParser.text({ limit: '5mb' }));
   application.use(helmet());
   logger.info('application.middleware.done');
 }
@@ -50,8 +51,8 @@ function routes(application) {
     res.json({
       body: req.body,
       query: req.query
-    }).status(200)
-  })
+    }).status(200);
+  });
   logger.info("application.route.done");
 }
 
@@ -65,7 +66,6 @@ async function database() {
   await mongoose.connect(url, config.get("db.mongo.options"));
   logger.info("application.db.done");
   await resetActivities();
-  await saveActivities('./src/assets/agenda.example.csv');
   logger.info("application.db.agenda");
 }
 
