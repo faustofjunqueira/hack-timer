@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import './social-media.css';
 
 export function SocialMediaWall({ id }) {
   id = id || "social-container";

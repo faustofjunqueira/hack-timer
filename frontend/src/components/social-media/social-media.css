@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu+Condensed&display=swap');
+
+*{
+    font-family: 'Ubuntu Condensed', sans-serif;
+}
+.flockler-wall-item__content{
+    background: #00347acf;
+    border: 0px solid #e1e1e1;
+    margin: 6px;
+}
+.flockler-wall-item__body{
+    color: #fff;
+}
+.flockler-wall-item__body a {
+    color: #ffba02;
+}
+a.flockler-wall-item__profile__name {
+    color: #f37157;
+}
+#medias{
+    padding-top: 15vh;
+}
+a.flockler-wall-item__profile__detail{
+    color: #ffa095;
+}
+.flockler-wall-item__share-action{
+    background-image: url('share-sprite.png');
+}
