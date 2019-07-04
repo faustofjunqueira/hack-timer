@@ -1,0 +1,29 @@
+
+################
+#### TWITER ####
+################
+
+
+# Consumer API keys
+@twitterApiKey=egGPjeJGoxQkGggc7VT4w0DLE
+@twitterApiSecretKey=UV78z8hTCMjBbMicBHGKfO0XCfTM1ZzFTx2UswhRgnIvWKRMQu
+
+# Access token & access token secret
+@twitterAccessToken=779513506576080896-IeBjEnKZ1Rz9cFnUOMUdtBYs7asBuTb
+@twitterAccessTokenSecret=6rtpqk5K83Heq6bkTHMdpBk9WIV2kSriJ4MLd7WtK0Ylt
+
+@twitterAuthCredetialBasic="ZWdHUGplSkdveFFrR2dnYzdWVDR3MERMRTpVVjc4ejhoVENNakJiTWljQkhHS2ZPMFhDZlRNMVp6RlR4MlVzd2hSZ25JdldLUk1RdQ==
+
+@twitterHost=https://api.twitter.com
+@twitterApiVersion=1.1
+@twitterAPIUrl={{twitterHost}}/{{twitterApiVersion}}
+### @name twitterAuth
+POST {{twitterHost}}/oauth2/token
+Authorization: Basic {{twitterAuthCredetialBasic}}
+Content-Type: application/x-www-form-urlencoded;charset=UTF-8
+
+grant_type=client_credentials
+
+### @name twitterSearch
+GET {{twitterAPIUrl}}/search/tweets.json?result_type=recent&q=%23zwift
+Authorization: Bearer AAAAAAAAAAAAAAAAAAAAAL7p%2FAAAAAAAsucRrbleP%2BE53GIlCDuXBRjhjlo%3DkfnADF1BV5I3sHdwPXWLWdUdJUVLm9D376WzP4oCvF0FmosNkz

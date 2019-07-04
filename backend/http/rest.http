@@ -46,7 +46,7 @@ POST {{url}}/twitter/query
 Content-Type: application/json
 
 {
-  "query":"#hackathonradix"
+  "query":"#hackathonradix,#radixhack,@radixeng"
 }
 
 ### @name getMedia

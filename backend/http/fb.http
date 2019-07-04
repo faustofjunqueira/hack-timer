@@ -1,0 +1,41 @@
+@fbHost=https://graph.facebook.com
+@fbAPIUrl={{fbHost}}/v3.3/
+@fbappID=387620128766053
+@fbclientId={{fbappID}}
+@fbclientSecret=e508c67fe74994287ddad9cc9c09b99d
+
+@fbaccessToken=EAAFgidgVOGUBAIqN1WPuLaZBPziZBZAbd1cYZBXDy4gLtsObmYs8nfJFZAJiphiEZCWeOYjUhicHT1cQZBU8gB2fsSZBnP1aK4JhBbWfYSn8ZCQw2FZBpNTrO9iWG28C7WwfNJ3kfRIvcSSNcrZAslxDOCnpTnL41CYHyBp1Npi1ETgoVxubNIYIIAnhUYWczSPhSf1FKct2jxHg0vXeO36GoZBg
+@pageId=321732548715156
+@instagramBusinessAccountId=17841406015491712
+
+### @name testRequest
+GET {{fbHost}}/facebook/picture?redirect=false
+
+### @name getAccessToken
+GET {{fbHost}}/oauth/access_token?client_id={{fbclientId}}&client_secret={{fbclientSecret}}&grant_type=client_credentials
+
+### @name getAccount
+GET {{fbAPIUrl}}me/accounts?access_token={{fbaccessToken}}
+
+### @name getPageId
+GET {{fbAPIUrl}}/{{pageId}}?access_token={{fbaccessToken}}&fields=instagram_business_account
+
+### @name getMediasIdOfMyPage
+GET {{fbAPIUrl}}/{{instagramBusinessAccountId}}/media?access_token={{fbaccessToken}}
+
+### @name getMediaInfoOfMyPageMetadata
+GET {{fbAPIUrl}}/18035344213013021?access_token={{fbaccessToken}}&metadata=1
+
+### @name getMediaInfoOfMyPageUrl
+GET {{fbAPIUrl}}/18035344213013021?access_token={{fbaccessToken}}&fields=media_url
+
+### @name getHashtagSearch
+GET {{fbAPIUrl}}/ig_hashtag_search?user_id={{instagramBusinessAccountId}}&access_token={{fbaccessToken}}&q=radixhack
+
+### @name getHashtagRecent
+GET {{fbAPIUrl}}/17873786767395968/recent_media?user_id={{instagramBusinessAccountId}}&access_token={{fbaccessToken}}
+
+### @name getHashtagId
+GET {{fbAPIUrl}}/18071744650076762?user_id={{instagramBusinessAccountId}}&access_token={{fbaccessToken}}&metadata=1
+
+
