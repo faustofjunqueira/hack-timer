@@ -85,9 +85,10 @@ const AgendaCollated = ({ listActivities }) => {
   )
 }
 
-(
-  <div className={className}>
-    <label>{title}</label>
-    <div>{description}</div>
-  </div>
-);
+const AgendaCollatedActivity = ({ className, title, description }) =>
+  (
+    <div className={className}>
+      <label>{title}</label>
+      <div>{description}</div>
+    </div>
+  );
