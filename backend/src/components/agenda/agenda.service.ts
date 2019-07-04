@@ -3,10 +3,10 @@ import logger from '../../utils/log';
 import * as fs from "fs";
 import * as parse from "csv-parse/lib/sync";
 
-export function csvParse(csvPath: string): IHackActivity[]
+export function csvParse(csvString: string): IHackActivity[]
 {
     const csv: Array<{start: string, end: string, title: string, description: string}> =
-    parse(fs.readFileSync(csvPath).toString().trim(),
+    parse(csvString.trim(),
         {columns: (header) => header}
     );
     const activities = new Array<IHackActivity>();
@@ -27,11 +27,11 @@ export async function getActivities(): Promise<IHackActivity[]>
    return await HackActivity.find({});
 }
 
-export async function saveActivities(csvPath: string): Promise<IHackActivity[]>
+export async function saveActivities(csvString: string): Promise<IHackActivity[]>
 {
     try
     {
-        const activities = csvParse(csvPath);
+        const activities = csvParse(csvString);
         const docs: IHackActivity[] = [];
         await activities.forEach(async (a) => {
             docs.push(await HackActivity.create(a));

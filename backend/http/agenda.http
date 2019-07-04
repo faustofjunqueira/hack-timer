@@ -1,3 +1,17 @@
+@api=agenda
+@url=http://localhost:10000
+
+
+### @name echo
+GET {{url}}/echo
+
+### @name testGetAgenda
+GET {{url}}/{{api}}/
+
+### @name testPuttAgenda
+PUT  {{url}}/{{api}}/ HTTP/1.1
+Content-Type: text/plain
+
 start,end,title,description
 2000-01-01T00:00:00,2000-01-01T01:00:00,Title1,Description1
 2000-01-02T02:00:00,2000-01-02T03:00:00,Title2,Description2
@@ -5,3 +19,6 @@ start,end,title,description
 2000-01-04T06:00:00,2000-01-04T07:00:00,Title4,Description4
 2000-01-05T08:00:00,2000-01-05T09:00:00,Title5,Description5
 2000-01-06T10:00:00,2000-01-06T11:00:00,Title6,Description6
+
+### @name testReseteAgenda
+DELETE  {{url}}/{{api}}/

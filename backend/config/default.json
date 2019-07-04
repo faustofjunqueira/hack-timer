@@ -23,5 +23,8 @@
   },
   "twitter": {
     "time-fetch-data": 60000
+  },
+  "agenda": {
+    "csvPath": "C:\\Projetos\\hack-timer\\backend\\src\\assets\\agenda.example.csv"
   }
 }
