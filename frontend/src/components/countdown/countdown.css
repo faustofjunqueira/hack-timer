@@ -1,15 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Ubuntu+Condensed&display=swap');
 
-.logo{
-    padding: 0;
-    margin: 0;
-    height: auto;
-    background-image: url('logo.png');
-    background-repeat: no-repeat;
-    background-size: contain;
-    height: 50px;
-    width: auto;
-}
 .clock{
     /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#e52dc3+0,ffbb00+100 */
     background: #e52dc3; /* Old browsers */
@@ -32,6 +22,48 @@
     line-height: 4rem;
 }
 .device label{
+    font-size: 2rem;
+    color: #fff;
+}
+.device{
+    flex: 1;
+    text-align: right;
+    padding: .5rem;
+}
+.logo{
+    flex: 1 1;
+    background: url(/static/media/logo.dc00bb74.png);
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: 1rem;
+
+}
+.agenda{
+    display: flex;
+    flex: 1;
+    justify-content: space-around;
+}
+.agenda .now{
+    margin: 1rem;
+    align-self: center;
+}
+.agenda .now label{
+    font-size: 1rem;
+    color: #fff;
+}
+.agenda .now div{
+    font-size: 3rem;
+    color: #fff;
+}
+.agenda .next{
+    margin: 1rem;
+    align-self: center;
+}
+.agenda .next label{
+    font-size: 1rem;
+    color: #fff;
+}
+.agenda .next div{
     font-size: 2rem;
     color: #fff;
 }
