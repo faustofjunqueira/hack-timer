@@ -51,4 +51,4 @@ export function configurationInstragramRouter(application: Application): void {
   router.get('/getdata', instagramGetData);
 
   application.use('/instagram', router);
-} 
+}

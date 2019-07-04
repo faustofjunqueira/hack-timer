@@ -2,6 +2,7 @@
   "application.shutdown": "Application shutdown",
   "application.middleware.done": "Middleware configured",
   "application.route.done": "Routes configured",
+  "application.db.agenda": "Agenda inserted in Database",
   "application.db.done": "Database Connected",
   "application.db.url": "Database:",
   "server.done": "Server Started",

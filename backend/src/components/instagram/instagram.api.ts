@@ -28,13 +28,13 @@ export async function instagramGetAccessToken(clientId: string, clientSecret: st
   });
 }
 
-export async function instagramGetData(access_token: string) {
+export async function instagramGetData(accessToken: string) {
   return new Promise((resolve, reject) => {
     const options = {
       // url: `https://api.instagram.com/v1/users/self/media/recent`,
       url: `https://api.instagram.com/v1/tags/zwift/media/recent`,
       method: "GET",
-      qs: { access_token }
+      qs: { accessToken }
     };
 
     request(options, (err, httpResponse, body) => {

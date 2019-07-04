@@ -1,0 +1,15 @@
+{
+  "application.shutdown": "Application shutdown",
+  "application.middleware.done": "Middleware configured",
+  "application.route.done": "Routes configured",
+  "application.db.agenda": "Agenda inserted in Database",
+  "application.db.done": "Database Connected",
+  "application.db.url": "Database:",
+  "server.done": "Server Started",
+  "process.twitter.start": "Twitter fetch data process started",
+  "process.twitter.it": "Twitter fetching",
+  "process.twitter.it.search": "Twitter get data",
+  "process.twitter.stored": "Twitter stored informations",
+  "process.twitter.it.end": "Twitter fetching end",
+  "process.twitter.it.error": "Twitter fetching error"
+}
