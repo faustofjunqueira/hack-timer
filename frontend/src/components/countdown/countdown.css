@@ -29,6 +29,7 @@
     flex: 1;
     text-align: right;
     padding: .5rem;
+    align-self: center;
 }
 .logo{
     flex: 1 1;
