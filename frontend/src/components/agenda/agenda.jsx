@@ -113,7 +113,7 @@ export const AgendaExpanded = ({ className, title, description }) =>
 
   <div className="calendar">
     <div className="column">
-      <h2>Sexta</h2>
+      <h2><div className="icon1"></div><span>Sexta</span></h2>
       <div className="event">
         <label>17h – 18h</label>
         <div>Recepção dos desafiantes</div>
@@ -161,7 +161,7 @@ export const AgendaExpanded = ({ className, title, description }) =>
     </div>
 
     <div className="column">
-      <h2>Sábado</h2>
+      <h2><div className="icon2"></div><span>Sábado</span></h2>
       {/* <div className="event">
         <label>0h00</label>
         <div>Pizza</div>
@@ -205,11 +205,11 @@ export const AgendaExpanded = ({ className, title, description }) =>
     </div>
 
     <div className="column">
-      <h2>Domingo</h2>
-      <div className="event">
+      <h2><div className="icon3"></div><span>Domingo</span></h2>
+      {/* <div className="event">
         <label>01h30 - 02h30 </label>
         <div>Distribuição de Energético</div>
-      </div>
+      </div> */}
       <div className="event">
         <label>2h</label>
         <div>Pipoca</div>
