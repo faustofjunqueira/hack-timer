@@ -12,7 +12,6 @@ function mapResult(list) {
 export const getActivities = () =>
   request('/agenda')
     .then(r => r.json())
-    .then(mapResult)
-    .then(r => console.log(r) || r)
+    .then(mapResult);
 
 

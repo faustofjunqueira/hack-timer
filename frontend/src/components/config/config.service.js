@@ -10,8 +10,7 @@ function mapResult(config) {
 export function getConfig() {
   return request('config')
     .then(r => r.json())
-    .then(c => c ? mapResult(c) : null)
-    .then(c => console.log(c) || c)
+    .then(c => c ? mapResult(c) : null);
 }
 
 
