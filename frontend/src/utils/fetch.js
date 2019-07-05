@@ -1,5 +1,5 @@
 const hostInfo = {
-  defaultBaseUrlDev: 'http://localhost:10000',
+  defaultBaseUrlDev: 'http://localhost:8080',
   defaultBaseUrlPrd: 'http://hack.radixeng.com.br:8080',
 
   get host() {

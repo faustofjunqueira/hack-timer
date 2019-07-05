@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Agenda } from '../agenda/agenda';
 import { getConfig } from '../config/config.service';
 import './countdown.css';
@@ -11,54 +11,32 @@ const Clock = ({ time }) => {
   let seconds = Math.floor((time % (1000 * 60)) / 1000);
 
   return (
-
-    <div className="clock">
-      <div className="logo"></div>
-
-      <Agenda />
-
-      <div className="device">
-        <div className="numbers">
-          <span className="clock_hours">{hours < 10 ? `0${hours}` : hours}</span>:
-          <span className="clock_minutes">{minutes < 10 ? `0${minutes}` : minutes}</span>:
-          <span className="clock_seconds">{seconds < 10 ? `0${seconds}` : seconds}</span>
-          <small>h</small>
-        </div>
-      </div>
+    <div className="numbers">
+      <span className="clock_hours">{hours < 10 ? `0${hours}` : hours}</span>:
+      <span className="clock_minutes">{minutes < 10 ? `0${minutes}` : minutes}</span>:
+      <span className="clock_seconds">{seconds < 10 ? `0${seconds}` : seconds}</span>
+      <small>h</small>
     </div>
   );
 }
 
-export class CountdownTimer extends React.Component {
-  constructor({ onEnd }) {
-    super({ onEnd });
-    this.state = {
-      timeLeft: null,
-      deadline: null,
-      maxTime: null
-    }
-  }
 
-  componentWillMount() {
-    getConfig().then(({ timer }) => this.setState({
-      timeLeft: Math.min(timer.deadline, timer.maxDate),
-      deadline: timer.deadline,
-      maxTime: timer.maxDate
-    }))
-  }
+export const CountdownTimer = ({ onEnd, deadline, maxTime }) => {
+  const [timeLeft, setTimeLeft] = useState(Math.min(deadline, maxTime));
 
-  componentDidMount() {
-    // start o countdown
-    startCountdown(this.state.deadline, timeLeft =>
-      this.setState({ ...this.setState, timeLeft: Math.min(timeLeft, this.state.maxTime) }),
-      this.props.onEnd,
-      700
-    );
-  }
+  startCountdown(deadline,
+    t => setTimeLeft(Math.min(t, maxTime)),
+    onEnd,
+    700
+  );
 
-  render() {
-    return (
-      <Clock time={this.state.timeLeft} />
-    );
-  }
+  return (
+    <div className="clock">
+      <div className="logo"></div>
+      <Agenda />
+      <div className="device">
+        <Clock time={timeLeft} />
+      </div>
+    </div>
+  );
 }
