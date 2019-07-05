@@ -1,6 +1,13 @@
 version: '3.1'
 
 services:
+  frontend: 
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+    restart: always
   application:
     build:
       context: .
