@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { AgendaCollated } from '../agenda/agenda';
-import { getConfig } from '../config/config.service';
 import './countdown.css';
 import { startCountdown } from './countdown.service';
 import './logo.png';
 
-const Clock = ({ time }) => {
+export const Clock = ({ time }) => {
   let hours = Math.floor(time / (1000 * 60 * 60));
   let minutes = Math.floor((time % (1000 * 60 * 60)) / (1000 * 60));
   let seconds = Math.floor((time % (1000 * 60)) / 1000);
@@ -20,8 +19,7 @@ const Clock = ({ time }) => {
   );
 }
 
-
-export const CountdownTimer = ({ onEnd, deadline, maxTime, listActivities }) => {
+export const CountdownTimer = ({ onEnd, deadline, maxTime }) => {
   const [timeLeft, setTimeLeft] = useState(Math.min(deadline, maxTime));
 
   startCountdown(deadline,
@@ -29,14 +27,17 @@ export const CountdownTimer = ({ onEnd, deadline, maxTime, listActivities }) => 
     onEnd,
     700
   );
-
   return (
-    <div className="clock">
-      <div className="logo"></div>
-      <AgendaCollated listActivities={listActivities} />
-      <div className="device">
-        <Clock time={timeLeft} />
-      </div>
+    <div className="device">
+      <Clock time={timeLeft} />
     </div>
-  );
+  )
 }
+
+export const CountdownTimerHeader = ({ onEnd, deadline, maxTime, listActivities }) => (
+  <div className="clock">
+    <div className="logo"></div>
+    <AgendaCollated listActivities={listActivities} />
+    <CountdownTimer onEnd={onEnd} deadline={deadline} maxTime={maxTime} />
+  </div>
+);
