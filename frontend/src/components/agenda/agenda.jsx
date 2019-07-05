@@ -162,22 +162,22 @@ export const AgendaExpanded = ({ className, title, description }) =>
 
     <div className="column">
       <h2>Sábado</h2>
-      <div className="event">
+      {/* <div className="event">
         <label>0h00</label>
         <div>Pizza</div>
-      </div>
-      <div className="event">
+      </div> */}
+      {/* <div className="event">
         <label>1h30 – 2h30 </label>
         <div>Distribuição de  Energético</div>
-      </div>
+      </div> */}
       <div className="event">
         <label>07h00 – 08h00</label>
         <div>Café da manhã</div>
       </div>
-      <div className="event">
+      {/* <div className="event">
         <label>9h00 – 10h00</label>
         <div>Laboral com os mentores</div>
-      </div>
+      </div> */}
       <div className="event">
         <label>12h00 – 13h00</label>
         <div>Almoço</div>
