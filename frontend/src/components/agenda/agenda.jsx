@@ -116,7 +116,7 @@ export const AgendaExpanded = ({ className, title, description }) =>
         </div>
         <div className="event">
           <label>15h30 - 16h30</label>
-          <div>Fireside one way feedback</div>
+          <div>Fireside feedback</div>
         </div>
         <div className="event">
           <label>17h00 – 18h00</label>
@@ -128,7 +128,7 @@ export const AgendaExpanded = ({ className, title, description }) =>
         </div>
         <div className="event">
           <label>22h00 - 23h00</label>
-          <div>Fireside one way feedback</div>
+          <div>Fireside feedback</div>
         </div>
       </div>
       <div className="column">
@@ -139,7 +139,7 @@ export const AgendaExpanded = ({ className, title, description }) =>
         </div>
         <div className="event">
           <label>8h00 – 9h00 </label>
-          <div>Fireside one way feedback e teste de projeção</div>
+          <div>Fireside feedback e teste de projeção</div>
         </div>
         <div className="event">
           <label>9h00</label>
