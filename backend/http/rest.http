@@ -1,5 +1,5 @@
-# @url=http://localhost:10000
-@url=http://hack.radixeng.com.br:8080
+@url=http://localhost:8080
+#@url=http://hack.radixeng.com.br:8080
 ### @name getConfiguration
 GET {{url}}/config
 Content-Type: application/json

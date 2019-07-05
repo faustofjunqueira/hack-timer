@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Agenda } from '../agenda/agenda';
+import { AgendaCollated } from '../agenda/agenda';
 import { getConfig } from '../config/config.service';
 import './countdown.css';
 import { startCountdown } from './countdown.service';
@@ -21,7 +21,7 @@ const Clock = ({ time }) => {
 }
 
 
-export const CountdownTimer = ({ onEnd, deadline, maxTime }) => {
+export const CountdownTimer = ({ onEnd, deadline, maxTime, listActivities }) => {
   const [timeLeft, setTimeLeft] = useState(Math.min(deadline, maxTime));
 
   startCountdown(deadline,
@@ -33,7 +33,7 @@ export const CountdownTimer = ({ onEnd, deadline, maxTime }) => {
   return (
     <div className="clock">
       <div className="logo"></div>
-      <Agenda />
+      <AgendaCollated listActivities={listActivities} />
       <div className="device">
         <Clock time={timeLeft} />
       </div>

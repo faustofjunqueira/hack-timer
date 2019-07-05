@@ -25,8 +25,8 @@ export class Board extends React.Component {
     if (this.state.config) {
       return (
         <section>
-          <CountdownTimer onEnd={() => console.log("end")} deadline={this.state.config.timer.deadline.getTime()} maxTime={this.state.config.timer.maxDate} />
-          <SocialMediaWall id="medias" style={{ "paddingTop": "15vh" }} />
+          <CountdownTimer onEnd={() => console.log("end")} listActivities={this.state.listActivities} deadline={this.state.config.timer.deadline.getTime()} maxTime={this.state.config.timer.maxDate} />
+          <SocialMediaWall id="medias" />
         </section>
       )
     }
