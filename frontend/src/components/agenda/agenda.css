@@ -12,7 +12,8 @@
 .calendar{
     display: flex;
     color: #fff;
-    padding: 0 5rem;
+    padding: 0 2rem;
+    justify-content: space-between;
 }
 h2{
     font-size: 2.5rem;
@@ -35,8 +36,8 @@ ul li{
 
 }
 .event label{
-    font-size: 1rem;
-    flex: 1;
+    font-size: 1.5rem;
+    flex: 2;
     text-align: right;
     padding-right: 1rem;
     align-self: flex-start;
@@ -66,7 +67,7 @@ ul li{
 .device .numbers{
     font-family: 'Ubuntu Condensed', sans-serif;
     align-self: center;
-    font-size: 5rem;
+    font-size: 8rem;
     color: #fff;
     line-height: 4rem;
 }
