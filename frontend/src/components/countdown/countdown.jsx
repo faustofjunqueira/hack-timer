@@ -29,19 +29,36 @@ const Clock = ({ time }) => {
   );
 }
 
-export const CountdownTimer = ({ deadline, maxTime, onEnd }) => {
-  console.log({ deadline, maxTime, onEnd })
-  const [timeLeft, setTimeLeft] = useState(Math.min(deadline, maxTime));
+export class CountdownTimer extends React.Component {
+  constructor({ onEnd }) {
+    super({ deadline, maxTime, onEnd });
+    this.state = {
+      timeLeft: null,
+      deadline: null,
+      maxTime: null
+    }
+  }
 
-  // start o countdown
-  startCountdown(deadline, timeLeft =>
-    setTimeLeft(Math.min(timeLeft, maxTime)),
-    onEnd,
-    700
-  );
+  componentWillMount() {
+    getConfig().then(({ timer }) => this.setState({
+      timeLeft: Math.min(timer.deadline, timer.maxDate),
+      deadline: timer.deadline,
+      maxTime: timer.maxDate
+    }))
+  }
 
-  return (
-    <Clock time={timeLeft} />
-  );
+  componentDidMount() {
+    // start o countdown
+    startCountdown(deadline, timeLeft =>
+      this.setState({ ...this.setState, timeLeft: Math.min(timeLeft, maxTime) }),
+      this.props.onEnd,
+      700
+    );
+  }
 
+  render() {
+    return (
+      <Clock time={timeLeft} />
+    );
+  }
 }
