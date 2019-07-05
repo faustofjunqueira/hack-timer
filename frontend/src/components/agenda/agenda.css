@@ -16,6 +16,11 @@
 }
 h2{
     font-size: 2.5rem;
+    display: flex;
+    align-self: center;
+}
+h2 span{
+    align-self: flex-end;
 }
 .column{
     flex: 1;
@@ -53,7 +58,7 @@ ul li{
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e52dc3', endColorstr='#ffbb00',GradientType=1 ); /* IE6-9 */
     display: flex;
     justify-content: space-between;
-    position: relative;
+    position: relative!important;
     width: 100%;
     height: 15vh;
     z-index: 1;
@@ -81,5 +86,29 @@ ul li{
     background-size: 80%;
     background-repeat: no-repeat;
     background-position: 1rem;
+}
 
+.icon1{
+    background: url("./win-face.svg");
+    width: 4rem;
+    height: 4rem;
+    background-size: contain;
+    background-repeat: no-repeat;
+    align-self: center;
+}
+.icon2{
+    background: url("./boy-with-suspicious-face.svg");
+    width: 4rem;
+    height: 4rem;
+    background-size: contain;
+    background-repeat: no-repeat;
+    align-self: center;
+}
+.icon3{
+    background: url("./inadequacy.svg");
+    width: 4rem;
+    height: 4rem;
+    background-size: contain;
+    background-repeat: no-repeat;
+    align-self: center;
 }
