@@ -10,11 +10,11 @@ const sizereport = require('gulp-sizereport');
 gulp.task('clean', function limparJS() {
   return gulp.src(['./js'], {
     read: false
-  }).pipe(clean({allowEmpty: true}));
+  }).pipe(clean({ allowEmpty: true }));
 });
 
 // Compila o TS para JS
-gulp.task('build', gulp.series('clean', () => {
+gulp.task('build', () => {
   const tsProject = ts.createProject('tsconfig.json');
   return es.merge([
     tsProject.src().pipe(tsProject()).js,
@@ -26,5 +26,5 @@ gulp.task('build', gulp.series('clean', () => {
     // })
     .pipe(sizereport())
     .pipe(gulp.dest('./js/'));
-}));
+});
 

@@ -6,6 +6,7 @@
   "scripts": {
     "start": "nodemon",
     "build": "gulp build",
+    "deploy": "ssh fausto@hack.radixeng.com.br 'bash -s' < ./scripts/deploy_commands.sh",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

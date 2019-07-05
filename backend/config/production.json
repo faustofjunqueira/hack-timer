@@ -1,0 +1,7 @@
+{
+  "db": {
+    "mongo": {
+      "host": "mongo/hackathon"
+    }
+  }
+}
