@@ -1,6 +1,6 @@
 @api=agenda
-//@url=http://localhost:10000
-@url=http://hack.radixeng.com.br:8080
+@url=http://localhost:8080
+// @url=http://hack.radixeng.com.br:8080
 
 
 ### @name echo
@@ -18,7 +18,7 @@ start,end,title,description
 2019-07-05T21:00:00.000Z,2019-07-05T22:00:00.000Z,Welcome,none
 2019-07-05T22:00:00.000Z,2019-07-05T23:00:00.000Z,Desafio,none
 2019-07-05T23:00:00.000Z,2019-07-06T00:00:00.000Z,Teams grouping,none
-2019-07-06T00:00:00.000Z,2019-07-06T01:00:00.000Z,Coding,none
+2019-07-06T00:00:00.000Z,2019-07-06T01:00:00.000Z,Coding,non
 2019-07-06T01:00:00.000Z,2019-07-06T02:30:00.000Z,Banho Liberado,none
 2019-07-06T10:00:00.000Z,2019-07-06T11:00:00.000Z,Café da manhã,none
 2019-07-06T12:00:00.000Z,2019-07-06T13:00:00.000Z,Refreshing,none

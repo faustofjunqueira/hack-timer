@@ -5,19 +5,31 @@ const getCurrentActivityIndex = (listActivities, time) =>
   listActivities.indexOf(listActivities.find(a => a.start.getTime() <= time && time <= a.end.getTime()))
 
 const getTitleNowActivity = (listActivities) => {
+  console.log(listActivities);
+  console.log('1');
   if (listActivities && listActivities.length) {
+    console.log('2');
     const now = Date.now();
+    console.log('3');
     if (now < listActivities[0].start.getTime()) {
+      console.log('4');
       return 'The winter is coming';
     }
+    console.log('5');
     if (now > listActivities[listActivities.length - 1].end.getTime()) {
+      console.log('6');
       return 'Encerrado!'
     }
+    console.log('7');
     const activityRunningIndex = getCurrentActivityIndex(listActivities, now);
+    console.log('8');
     if (activityRunningIndex !== -1) {
+      console.log('9');
       return listActivities[activityRunningIndex].title;
     }
+    console.log('10');
   }
+  console.log('11');
   return 'Coding';
 }
 
