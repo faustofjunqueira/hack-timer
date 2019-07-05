@@ -1,5 +1,10 @@
 {
   "http": {
-    "port": "PORT"
+    "port": "HTTP_PORT"
+  },
+  "db": {
+    "mongo": {
+      "host": "MONGO_HOST"
+    }
   }
 }

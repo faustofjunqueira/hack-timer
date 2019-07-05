@@ -1,7 +1,15 @@
 version: '3.1'
 
 services:
-
+  application:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 10000:10000
+    links:
+      - mongo
+    restart: always
   mongo:
     image: mongo:3.6
     restart: always

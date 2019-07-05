@@ -9,7 +9,6 @@ import logger from './utils/log';
 import { upServer } from './server';
 import { configureConfigurationRoute } from './components/configuration/configuration.service';
 import { configureAgendaRouter } from './components/agenda/agenda.api';
-import { saveActivities, resetActivities } from './components/agenda/agenda.service';
 
 export async function startApplication() {
   try {
