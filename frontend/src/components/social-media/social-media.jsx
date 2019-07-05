@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import './social-media.css';
 
-export function SocialMediaWall({ id }) {
+export function SocialMediaWall({ id, style }) {
   id = id || "social-container";
   useEffect(() => {
     window._flockler = [{
@@ -20,6 +20,6 @@ export function SocialMediaWall({ id }) {
   })
 
   return (
-    <div id={id}></div>
+    <div id={id} style={style}></div>
   )
 }

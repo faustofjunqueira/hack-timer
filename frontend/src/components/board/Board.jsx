@@ -6,6 +6,6 @@ import './board.css';
 export const Board = (props) => (
   <section>
     <CountdownTimer onEnd={() => console.log("end")} />
-    <SocialMediaWall id="medias" />
+    <SocialMediaWall id="medias" style={{ "paddingTop": "15vh" }} />
   </section>
 );
