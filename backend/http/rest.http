@@ -1,4 +1,4 @@
-@url=http://localhost:8080
+@url=http://localhost:10000
 
 ### @name getConfiguration
 GET {{url}}/config

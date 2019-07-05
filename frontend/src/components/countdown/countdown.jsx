@@ -30,6 +30,7 @@ const Clock = ({ time }) => {
 }
 
 export const CountdownTimer = ({ deadline, maxTime, onEnd }) => {
+  console.log({ deadline, maxTime, onEnd })
   const [timeLeft, setTimeLeft] = useState(Math.min(deadline, maxTime));
 
   // start o countdown
