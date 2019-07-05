@@ -1,6 +1,6 @@
 @api=agenda
 //@url=http://localhost:10000
-@url=http://hack.radixeng.com.br:10000
+@url=http://hack.radixeng.com.br:8080
 
 
 ### @name echo
