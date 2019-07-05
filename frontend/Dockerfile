@@ -10,7 +10,8 @@ RUN npm install && npm run build
 
 FROM httpd:2.4
 
-COPY ./.htaccess /usr/local/apache2/htdocs
+RUN echo "Run"
+COPY ./.htaccess /usr/local/apache2/htdocs 
 COPY --from=NODE_BUILDER /app/build /usr/local/apache2/htdocs
 
 EXPOSE 8080
