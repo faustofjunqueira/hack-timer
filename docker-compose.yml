@@ -2,22 +2,24 @@ version: '3.1'
 
 services:
   nginx:
-    image: jwilder/nginx-proxy
+    image: nginx:alpine
     container_name: "hack-proxy"
     restart: unless-stopped
-    expose:
-      - "80"
+    ports:
+      - 80:80
     network_mode: host
     volumes:
-      - ./my_proxy.conf:/etc/nginx/conf.d/my_proxy.conf:ro
-      - /var/run/docker.sock:/tmp/docker.sock
+      - ./config/nginx.conf:/etc/nginx/nginx.conf
+    links:
+      - frontend
+      - application
   frontend:
     container_name: "hack-front"
     build:
       context: ./frontend
       dockerfile: Dockerfile
     ports:
-      - 80:80
+      - 10001:80
     restart: always
   application:
     container_name: "hack-back"
