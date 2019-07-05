@@ -9,7 +9,7 @@ const getTitleNowActivity = (listActivities) => {
   if (listActivities && listActivities.length) {
     const now = Date.now();
     if (now < listActivities[0].start.getTime()) {
-      return 'The winter is comming';
+      return 'The winter is coming';
     }
     if (now > listActivities[listActivities.length - 1].end.getTime()) {
       return 'Encerrado!'
