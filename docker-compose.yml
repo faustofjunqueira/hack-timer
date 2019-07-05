@@ -1,0 +1,39 @@
+version: '3.1'
+
+services:
+  nginx:
+    image: jwilder/nginx-proxy
+    container_name: "hack-proxy"
+    restart: unless-stopped
+    expose:
+      - "80"
+    network_mode: host
+    volumes:
+      - ./my_proxy.conf:/etc/nginx/conf.d/my_proxy.conf:ro
+      - /var/run/docker.sock:/tmp/docker.sock
+  frontend:
+    container_name: "hack-front"
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+    restart: always
+  application:
+    container_name: "hack-back"
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - 10000:10000
+    links:
+      - mongo
+    restart: always
+  mongo:
+    container_name: "hack-db"
+    image: mongo:3.6
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_DATABASE: hackathon
