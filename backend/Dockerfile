@@ -28,8 +28,6 @@ RUN npm install
 
 EXPOSE 10000
 
-RUN ls -la .
-
 USER node
 
 CMD node ./js/index.js

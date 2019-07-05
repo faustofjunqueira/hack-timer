@@ -8,6 +8,7 @@
     "src/**/*.spec.ts"
   ],
   "env": {
+    "HTTP_PORT": "8080",
     "NODE_ENV": "development"
   },
   "exec": "ts-node ./src/index.ts"
