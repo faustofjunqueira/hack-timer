@@ -17,7 +17,7 @@
 .device .numbers{
     font-family: 'Ubuntu Condensed', sans-serif;
     align-self: center;
-    font-size: 5rem;
+    font-size: 7rem;
     color: #fff;
     line-height: 4rem;
 }
@@ -41,30 +41,20 @@
 }
 .agenda{
     display: flex;
-    flex: 1;
+    flex: 2;
     justify-content: space-around;
 }
-.agenda .now{
-    margin: 1rem;
+.agenda .now, .agenda .next{
     align-self: center;
+    flex: 1;
+    text-align: center;
 }
-.agenda .now label{
+.agenda .now label, .agenda .next label{
     font-size: 1rem;
     color: #fff;
 }
-.agenda .now div{
-    font-size: 3rem;
-    color: #fff;
-}
-.agenda .next{
-    margin: 1rem;
-    align-self: center;
-}
-.agenda .next label{
-    font-size: 1rem;
-    color: #fff;
-}
-.agenda .next div{
+.agenda .now div, .agenda .next div{
     font-size: 2rem;
     color: #fff;
+    line-height: 28px;
 }
