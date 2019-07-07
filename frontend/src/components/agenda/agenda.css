@@ -9,6 +9,15 @@
     display: flex;
     flex-direction: column;
 }
+
+.wrapper-danger{
+    background: #cc0a0a;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
 .calendar{
     display: flex;
     color: #fff;
@@ -64,6 +73,12 @@ ul li{
     height: 15vh;
     z-index: 1;
 }
+
+.clock-danger{
+    height: 20vh;
+    color: #fff;
+}
+
 .device .numbers{
     font-family: 'Ubuntu Condensed', sans-serif;
     align-self: center;
@@ -75,12 +90,29 @@ ul li{
     font-size: 2rem;
     color: #fff;
 }
-.device{
+.device {
     flex: 1;
-    text-align: right;
     padding: .5rem;
-    align-self: center;
 }
+
+.device-danger .numbers{
+    font-family: 'Ubuntu Condensed', sans-serif;
+    align-self: center;
+    font-size: 8rem;
+    color: #fff;
+    line-height: 4rem;
+}
+.device-danger label{
+    font-size: 2rem;
+    color: #fff;
+}
+.device-danger{
+    flex: 1;
+    padding: .5rem;
+}
+
+
+
 .logo{
     flex: 1 1;
     background: url(/static/media/logo.dc00bb74.png);

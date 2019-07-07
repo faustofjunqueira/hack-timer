@@ -151,7 +151,7 @@ export const AgendaExpanded = ({ className, title, description }) =>
         </div>
         <div className="event">
           <label>12h00 – 15h00</label>
-          <div>Chop!</div>
+          <div>Chopp!</div>
         </div>
       </div>
     </div>
