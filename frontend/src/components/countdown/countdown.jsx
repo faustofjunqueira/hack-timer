@@ -19,11 +19,16 @@ export const Clock = ({ time }) => {
   );
 }
 
-export const CountdownTimer = ({ onEnd, deadline, maxTime }) => {
+export const CountdownTimer = ({ onEnd, deadline, maxTime, onTime }) => {
   const [timeLeft, setTimeLeft] = useState(Math.min(deadline, maxTime));
 
   startCountdown(deadline,
-    t => setTimeLeft(Math.min(t, maxTime)),
+    t => {
+      if(onTime) {
+        onTime(t);
+      }
+      setTimeLeft(Math.min(t, maxTime));
+    },
     onEnd,
     700
   );

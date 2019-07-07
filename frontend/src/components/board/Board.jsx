@@ -43,26 +43,45 @@ export class AgendaBoard extends React.Component {
     super(props)
     this.state = {
       config: null,
-      listActivities: null
+      listActivities: null,
+      ending: false
     }
   }
 
   componentWillMount() {
     Promise.all([getConfig(), getActivities()])
-      .then(([config, listActivities]) => this.setState({ config, listActivities }))
+      .then(([config, listActivities]) => this.setState({ config, listActivities, ending: this.state.ending }))
       .catch(console.log);
+  }
+
+  checkTime(t) {
+    if(!this.state.ending && t <= 30 * 60 * 1000) { // meia hora
+      this.setState({...this.state, ending: true})
+    }
   }
 
   render() {
     if (this.state.config) {
+      if(!this.state.ending) {
+        return (
+          <section>
+            <div className="wrapper">
+              <div className="clock">
+                <div className="logo"></div>
+                <CountdownTimer onTime={(t) => this.checkTime(t)} onEnd={() => console.log("end")} deadline={this.state.config.timer.deadline.getTime()} maxTime={this.state.config.timer.maxDate} />
+              </div>
+              <AgendaExpanded />
+            </div>
+  
+          </section>
+        )
+      }
       return (
         <section>
-          <div className="wrapper">
-            <div className="clock">
-              <div className="logo"></div>
-              <CountdownTimer onEnd={() => console.log("end")} deadline={this.state.config.timer.deadline.getTime()} maxTime={this.state.config.timer.maxDate} />
+          <div className="wrapper-danger">
+            <div className="clock-danger">
+              <CountdownTimer  onEnd={() => console.log("end")} deadline={this.state.config.timer.deadline.getTime()} maxTime={this.state.config.timer.maxDate} />
             </div>
-            <AgendaExpanded />
           </div>
 
         </section>

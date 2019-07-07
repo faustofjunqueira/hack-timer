@@ -12,6 +12,9 @@
 
 .wrapper-danger{
     background: #cc0a0a;
+    position: absolute;
+    width: 100%;
+    height: 100%;
     display: flex;
     width: 100%;
     justify-content: center;
@@ -95,22 +98,21 @@ ul li{
     padding: .5rem;
 }
 
-.device-danger .numbers{
+.clock-danger .device .numbers{
     font-family: 'Ubuntu Condensed', sans-serif;
     align-self: center;
-    font-size: 8rem;
+    font-size: 20rem;
     color: #fff;
     line-height: 4rem;
 }
-.device-danger label{
+.clock-danger .device label{
     font-size: 2rem;
     color: #fff;
 }
-.device-danger{
+.clock-danger .device{
     flex: 1;
     padding: .5rem;
 }
-
 
 
 .logo{
