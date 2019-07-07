@@ -62,20 +62,20 @@ export class AgendaBoard extends React.Component {
 
   render() {
     if (this.state.config) {
-      if(!this.state.ending) {
-        return (
-          <section>
-            <div className="wrapper">
-              <div className="clock">
-                <div className="logo"></div>
-                <CountdownTimer onTime={(t) => this.checkTime(t)} onEnd={() => console.log("end")} deadline={this.state.config.timer.deadline.getTime()} maxTime={this.state.config.timer.maxDate} />
-              </div>
-              <AgendaExpanded />
-            </div>
+      // if(!this.state.ending) {
+      //   return (
+      //     <section>
+      //       <div className="wrapper">
+      //         <div className="clock">
+      //           <div className="logo"></div>
+      //           <CountdownTimer onTime={(t) => this.checkTime(t)} onEnd={() => console.log("end")} deadline={this.state.config.timer.deadline.getTime()} maxTime={this.state.config.timer.maxDate} />
+      //         </div>
+      //         <AgendaExpanded />
+      //       </div>
   
-          </section>
-        )
-      }
+      //     </section>
+      //   )
+      // }
       return (
         <section>
           <div className="wrapper-danger">

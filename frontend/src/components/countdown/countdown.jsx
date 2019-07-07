@@ -24,10 +24,10 @@ export const CountdownTimer = ({ onEnd, deadline, maxTime, onTime }) => {
 
   startCountdown(deadline,
     t => {
-      if(onTime) {
-        onTime(t);
-      }
-      setTimeLeft(Math.min(t, maxTime));
+     // if(onTime) {
+     //   onTime(t);
+     // }
+     setTimeLeft(Math.min(t, maxTime));
     },
     onEnd,
     700
