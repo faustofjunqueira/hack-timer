@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {getActivities} from './agenda.service';
 import './agenda.css';
 
 const getCurrentActivityIndex = (listActivities, time) =>
@@ -69,7 +70,6 @@ const AgendaCollatedActivity = ({ className, title, description }) =>
     </div>
   );
 
-
 export const AgendaExpanded = ({ className, title, description }) =>
   (
     <div className="calendar">
@@ -135,10 +135,6 @@ export const AgendaExpanded = ({ className, title, description }) =>
         <h2><div className="icon3"></div><span>Domingo</span></h2>
         <div className="event">
           <label>07h00 – 08h00</label>
-          <div>Café da manhã</div>
-        </div>
-        <div className="event">
-          <label>8h00 – 9h00 </label>
           <div>Fireside feedback</div>
         </div>
         <div className="event">
@@ -160,3 +156,44 @@ export const AgendaExpanded = ({ className, title, description }) =>
       </div>
     </div>
   );
+
+// export const AgendaDay = ({day, icon}) => (
+//   <div className="column">
+//     <h2><div className={icon}></div><span>{day}</span></h2>
+//   </div>
+// );
+
+// export const AgendaActivity = ({title, start, end}) => (
+//   <div className="event">
+//     <label>{start}h – {end}h</label>
+//     <div>{title}</div>
+//   </div>
+// );
+
+
+// export class AgendaExpanded extends React.Component
+// {
+//   constructor(props) {
+//     super(props)
+//     this.state = {
+//       listActivities: null
+//     }  
+//   }
+
+//   componentWillMount()
+//   {
+//     Promise.all([getActivities()])
+//     .then(([listActivities]) => this.setState({listActivities }))
+//     .catch(console.log);
+//   }
+
+//   render()
+//   {
+//     if(this.listActivities)
+//     {
+//       return
+//     }
+//     return (<div>Loading</div>);
+//   }
+
+// }

@@ -32,8 +32,8 @@ export async function saveActivities(csvString: string): Promise<IHackActivity[]
     try
     {
         const activities = csvParse(csvString);
-        const docs: IHackActivity[] = [];
-        await activities.forEach(async (a) => {
+        const docs: IHackActivity[] = new Array<IHackActivity>();
+        activities.forEach(async (a) => {
             docs.push(await HackActivity.create(a));
         });
         return Promise.resolve(docs);
