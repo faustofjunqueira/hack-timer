@@ -1,0 +1,207 @@
+name: Deploy dev
+
+on:
+  workflow_dispatch:
+    inputs:
+      repository:
+        description: docker registry repository name
+        default: plataforma-unico
+        type: string
+        required: true
+
+      ref:
+        description: branch, tag or SHA to refer your code
+        required: true
+        type: string
+
+      app_name:
+        description: Application namespace
+        required: true
+        type: choice
+        options:
+          - bff/user/api
+          - core/api
+          - ingress/userauthz/filter
+          - ingress/vaultauthz/filter
+          - moja/dictionary/api
+          - moja/document/api
+          - moja/docupdateidns
+          - moja/product/api
+          - notification/notification/api
+          - notification/pendingactivities/api
+          - notification/preference/api
+          - notification/push/api
+          - preference/preference/api
+
+
+env:
+  GO_VERSION: "1.20"
+  GITHUB_ACCESS_TOKEN: ${{ secrets.SA_SRE_READONLY }}
+  OUTPUT_FOLDER_PATH: ./build
+  GCP_JSON_B64: ${{ secrets.gcp_auth_json_b64 != '' && secrets.gcp_auth_json_b64 || secrets.GCP_REGISTRY_CROSS }}
+  GCP_JSON_PATH: ${{ secrets.gcp_auth_json_b64 != '' && 'custom.json' || 'uar.json' }}
+  DOCKER_REGISTRY_ENDPOINT: "us-east1-docker.pkg.dev"
+  DOCKER_REPOSITORY_NAME: "plataforma-unico"
+  GCP_PROJECT_ID: "u8ea11577"
+
+  # Go Code Entrypoint
+  # Note: All Variable has _SRC_ENTRYPOINT as suffix. The prefix must be the same of tag prefix, in upper case and replace - to _. Example tag: bff-user-api/1.0.0, env will be BFF_USER_API_SRC_ENTRYPOINT. The same to _CODE_FOLDER
+  BFF_USER_API_SRC_ENTRYPOINT: cmd/user/api/main.go
+  BFF_USER_API_CODE_FOLDER: internal/user
+  BFF_USER_API_SONARQUBE_PRODUCT_KEY: acesso_you_bff_user_api
+
+  CORE_API_SRC_ENTRYPOINT: cmd/core/api/main.go
+  CORE_API_SRC_CODE_FOLDER: cmd/core/api/main.go
+  CORE_API_SONARQUBE_PRODUCT_KEY: acesso_you_bff_user_api
+
+jobs:
+  env-setup:
+    name: Setup Environment
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Set env
+        id: set-env
+        run: |
+          release_version=${GITHUB_REF##*/}
+          app_name=$(echo $GITHUB_REF | awk -F'/' '{print $3}')
+          app_name_path=${app_name//-/\/}
+          src_env_basename="${app_name//-/_}"
+          src_env_basename="${src_env_basename^^}"
+          src_entrypoint_env_name="${src_env_basename}_SRC_ENTRYPOINT"
+          src_entrypoint=$(eval echo "\$$src_entrypoint_env_name")
+          src_code_folder_env_name="${src_env_basename}_CODE_FOLDER"
+          src_code_folder=$(eval echo "\$$src_code_folder_env_name")
+          src_sonarqube_product_key_env_name="${src_env_basename}_SONARQUBE_PRODUCT_KEY"
+          src_sonarqube_product_key=$(eval echo "\$$src_sonarqube_product_key_env_name")
+
+          echo "release_version=${release_version}" >> $GITHUB_OUTPUT
+          echo "app_name=${app_name}" >> $GITHUB_OUTPUT
+          echo "app_name_path=${app_name_path}" >> $GITHUB_OUTPUT
+          echo "docker_image_fullname=${{ env.DOCKER_REGISTRY_ENDPOINT }}/${{ env.GCP_PROJECT_ID }}/${{ env.DOCKER_REPOSITORY_NAME }}/${app_name_path}:ci-${release_version}" >> $GITHUB_OUTPUT
+          echo "src_entrypoint=${src_entrypoint}" >> $GITHUB_OUTPUT
+          echo "src_code_folder=${src_code_folder}" >> $GITHUB_OUTPUT
+          echo "src_sonarqube_product_key=${src_sonarqube_product_key}" >> $GITHUB_OUTPUT
+      - name: Validate src entrypoint
+        if: steps.set-env.outputs.src_entrypoint == ''
+        run: |
+          echo "::error title=TagPrefix::Not found src entrypoint folder for this tag"
+          echo "::error title=TagPrefix::Please, go to .github/workflow/build-go-and-push and create the env vars"
+          exit -1
+      - name: Validate src code folder
+        if: steps.set-env.outputs.src_code_folder == ''
+        run: |
+          echo "::error title=TagPrefix::Not found code folder for this tag"
+          echo "::error title=TagPrefix::Please, go to .github/workflow/build-go-and-push and create the env vars"
+          exit -1
+    outputs:
+      go_version: ${{ env.GO_VERSION }}
+      release_version: ${{ steps.set-env.outputs.release_version }}
+      app_name: ${{ steps.set-env.outputs.app_name }}
+      app_name_path: ${{ steps.set-env.outputs.app_name_path }}
+      docker_image_fullname: ${{ steps.set-env.outputs.docker_image_fullname }}
+      src_entrypoint: ${{ steps.set-env.outputs.src_entrypoint }}
+      src_code_folder: ${{ steps.set-env.outputs.src_code_folder }}
+      src_sonarqube_product_key: ${{ steps.set-env.outputs.src_sonarqube_product_key }}
+
+  testando:
+    name: testando
+    runs-on: ubuntu-22.04
+    steps:
+      - run: echo ${{ inputs.ref }}
+      - run: echo ${{ inputs.app_name }}
+      - name: Checkout code ${{ inputs.ref }}
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+          ref: ${{ inputs.ref }}
+      - run: ls -la
+
+
+  # build:
+  #   name: Build
+  #   runs-on: ubuntu-22.04
+  #   needs: [env-setup]
+  #   env:
+  #     GOPRIVATE: github.com/acesso-io
+  #     GIT_CONFIG_TOKEN: $GITHUB_ACCESS_TOKEN
+  #     SRC_ENTRYPOINT: ${{ needs.env-setup.outputs.src_entrypoint }}
+  #   steps:
+  #     - name: Checkout code ${{ github.head_ref }}
+  #       uses: actions/checkout@v3
+  #       with:
+  #         fetch-depth: 1
+  #         ref: ${{ github.head_ref }}
+
+  #     - uses: actions/setup-go@v4
+  #       name: Install Go ${{ needs.env-setup.outputs.go_version }}
+  #       with:
+  #         go-version: ${{ needs.env-setup.outputs.go_version }}
+
+  #     - name: Git configure
+  #       run: git config --global url.https://$GITHUB_ACCESS_TOKEN@github.com/.insteadOf https://github.com/
+
+  #     - uses: actions/cache@v2
+  #       with:
+  #         path: |
+  #           ~/.cache/go-build
+  #           ~/go/pkg/mod
+  #         key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+  #         restore-keys: |
+  #           ${{ runner.os }}-go-
+
+  #     - name: Go fmt
+  #       shell: bash
+  #       run: |
+  #         ! go fmt ./... 2>&1 | read
+
+  #     - name: Go Build
+  #       run: |
+  #         go build -v -o ${{ env.OUTPUT_FOLDER_PATH }}/${{ needs.env-setup.outputs.app_name }} $SRC_ENTRYPOINT
+  #         echo "file inside bin folder..."
+  #         ls -la ${{ env.OUTPUT_FOLDER_PATH }}
+
+  #     - name: Create Artifact
+  #       id: create_actifact
+  #       uses: actions/upload-artifact@v3
+  #       with:
+  #         name: ${{ needs.env-setup.outputs.app_name }}
+  #         path: ${{ env.OUTPUT_FOLDER_PATH }}
+  #         retention-days: 1
+
+  # docker-image:
+  #   name: Docker Push ${{ needs.env-setup.outputs.release_version }}
+  #   runs-on: ubuntu-22.04
+  #   env:
+  #     DOCKER_IMAGE_FULLNAME: ${{ needs.env-setup.outputs.docker_image_fullname }}
+  #   needs: [env-setup, build]
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v3
+
+  #     - name: Setup gcloud
+  #       uses: google-github-actions/setup-gcloud@v0
+
+  #     - name: GCP Auth
+  #       run: |
+  #         echo -n "${GCP_JSON_B64}" | base64 --decode > "${GCP_JSON_PATH}"
+  #         gcloud auth activate-service-account --key-file="${GCP_JSON_PATH}"
+  #         gcloud auth configure-docker ${DOCKER_REGISTRY_ENDPOINT}
+
+  #     - name: Get Binary
+  #       uses: actions/download-artifact@v3
+  #       with:
+  #         name: ${{ needs.env-setup.outputs.app_name }}
+  #         path: ${{ env.OUTPUT_FOLDER_PATH }}
+
+  #     - name: List Directory
+  #       run: ls -la
+
+  #     - name: Docker Build
+  #       run: docker build --build-arg APP_NAME=${{ needs.env-setup.outputs.app_name }} -f Dockerfile.ci -t "${DOCKER_IMAGE_FULLNAME}" .
+
+  #     - name: Docker push to UAR (Unico Artifact Registry)
+  #       run: |
+  #         gcloud auth configure-docker ${{ env.DOCKER_REGISTRY_ENDPOINT }}
+  #         docker push "${DOCKER_IMAGE_FULLNAME}"
